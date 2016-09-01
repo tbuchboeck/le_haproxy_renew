@@ -26,9 +26,9 @@ for filename in os.listdir(certs_location):
     exp2 = datetime.datetime.strptime(exp, '%b %d %H:%M:%S %Y %Z')
     remaining = (exp2 - datetime.datetime.now()).days
     if remaining > renew_threshold:
-        logging.warning('The certificate for %s is up to date, no need for renewal (%d days left).',filename.rstrip('.pem'),remaining)
+        logging.warning('The certificate for %s is up to date, no need for renewal (%d days left).',filename.replace('.pem',''),remaining)
     else:
-        logging.warning('The certificate for %s is about to expire soon. Starting Let\'s Encrypt (HAProxy:%s) renewal script...',filename.rstrip('.pem'),http_01_port)
+        logging.warning('The certificate for %s is about to expire soon. Starting Let\'s Encrypt (HAProxy:%s) renewal script...',filename.replace('.pem',''),http_01_port)
         renew = renew + 1
         le_crypt = "%sletsencrypt-auto certonly --standalone --agree-tos --renew-by-default --config %s --http-01-port %s" % (le_path, config_file, http_01_port)
         for domain in domains:
@@ -38,7 +38,7 @@ for filename in os.listdir(certs_location):
         le_exe = os.popen(le_crypt).read().split("\n")
         for line in le_exe:
             logging.warning(line)
-        os.popen('cat /etc/letsencrypt/live/%s/fullchain.pem /etc/letsencrypt/live/%s/privkey.pem > %s%s' % (filename.rstrip('.pem'),filename.rstrip('.pem'),certs_location,filename))
+        os.popen('cat /etc/letsencrypt/live/%s/fullchain.pem /etc/letsencrypt/live/%s/privkey.pem > %s%s' % (filename.replace('.pem',''),filename.replace('.pem',''),certs_location,filename))
         logging.warning('Creating %s with latest certs...',filename)
 
 if renew > 0:
