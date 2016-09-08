@@ -9,7 +9,7 @@ le_path='/opt/letsencrypt/'
 config_file='/usr/local/etc/le-renew-haproxy.ini'
 certs_location='/etc/haproxy/certs/'
 http_01_port='54321'
-renew_threshold = 14
+renew_threshold = 20
 
 
 logging.warning("Starting Let's Encrypt Renewal Script...")
