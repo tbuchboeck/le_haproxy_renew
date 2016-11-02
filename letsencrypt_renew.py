@@ -30,7 +30,7 @@ for filename in os.listdir(certs_location):
     else:
         logging.warning('The certificate for %s is about to expire soon. Starting Let\'s Encrypt (HAProxy:%s) renewal script...',filename.replace('.pem',''),http_01_port)
         renew = renew + 1
-        le_crypt = "%sletsencrypt-auto certonly --standalone --agree-tos --renew-by-default --config %s --http-01-port %s" % (le_path, config_file, http_01_port)
+        le_crypt = "%sletsencrypt-auto certonly --standalone --agree-tos --renew-by-default --config %s --http-01-port %s --text --non-interactive" % (le_path, config_file, http_01_port)
         for domain in domains:
             logging.warning('Using domain: %s', domain)
             le_crypt = "%s -d %s" % (le_crypt, domain)
