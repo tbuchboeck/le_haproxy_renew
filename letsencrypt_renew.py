@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S - ')
 
 le_path='/opt/letsencrypt/'
-config_file='/usr/local/etc/le-renew-haproxy.ini'
+config_file='/etc/haproxy/le-renew-haproxy.ini'
 certs_location='/etc/haproxy/certs/'
 http_01_port='54321'
 renew_threshold = 20
