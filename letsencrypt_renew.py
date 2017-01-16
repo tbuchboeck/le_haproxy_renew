@@ -48,3 +48,4 @@ if renew > 0:
     logging.warning(tmp)
 else:
     logging.warning('No certificates renewed so no reload necessary')
+    tmp = os.popen('service haproxy start').read().strip()
