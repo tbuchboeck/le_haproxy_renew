@@ -11,6 +11,7 @@ certs_location='/etc/haproxy/certs/'
 http_01_port='54321'
 renew_threshold = 20
 
+tmp = os.popen('service haproxy stop').read().strip()
 
 logging.warning("Starting Let's Encrypt Renewal Script...")
 
@@ -43,7 +44,7 @@ for filename in os.listdir(certs_location):
 
 if renew > 0:
     logging.warning('%s Certificates renewed',renew)
-    tmp = os.popen('service haproxy reload').read().strip()
+    tmp = os.popen('service haproxy start').read().strip()
     logging.warning(tmp)
 else:
     logging.warning('No certificates renewed so no reload necessary')
